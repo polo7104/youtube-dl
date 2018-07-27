@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <!-- jQuery library -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <style>
+      @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+      body{
+        overflow: hidden;
+      }
+      .frm-container{
+        padding-left: 5px;
+        padding-top: 100px;
+      }
+      .animationload {
+        background-color: #fff;
+        height: 100%;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10000;
+      }
+      .osahanloading {
+        animation: 1.5s linear 0s normal none infinite running osahanloading;
+        background: #fed37f none repeat scroll 0 0;
+        border-radius: 50px;
+        height: 50px;
+        left: 50%;
+        margin-left: -25px;
+        margin-top: -25px;
+        position: absolute;
+        top: 50%;
+        width: 50px;
+      }
+      .osahanloading::after {
+        animation: 1.5s linear 0s normal none infinite running osahanloading_after;
+        border-color: #85d6de transparent;
+        border-radius: 80px;
+        border-style: solid;
+        border-width: 10px;
+        content: "";
+        height: 80px;
+        left: -15px;
+        position: absolute;
+        top: -15px;
+          width: 80px;
+      }
+      @keyframes osahanloading {
+        0% {
+            transform: rotate(0deg);
+        }
+        50% {
+            background: #85d6de none repeat scroll 0 0;
+            transform: rotate(180deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+      }
+      h2{
+        font-family: Jeju Gothic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="frm-container">
+      <form name="frm" class="form-horizontal" action="/mp3/extract" method="POST" >
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">URL</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="url" name="url" placeholder="youtube url">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">NAME</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="name" name="name" placeholder="다운 파일 명">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <input id="btnDown" type="button" class="btn btn-default" value="DownLoad" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="container" style="display:none">
+      <div class="row"> 
+     
+        <div class="animationload">
+            <div class="text-center">
+                <h2>파일 다운로드가 완료되면 새로고침 해주세요.</h2>
+            </div>
+            <div class="osahanloading"></div>
+        </div>
+      </div>
+    </div>
+    <script> 
+      $('#btnDown').click(()=>{        
+        var url = $('#url').val();
+        var name = $('#name').val();
+        if(url != '' && name != ''){
+          $('.container').show();
+          frm.submit();
+        }else{
+          alert('다시 입력해 주세요.');
+        }
+        // $.post('/mp3/extract',{url:url,name:name},(data)=>{
+        //   console.log(data);
+        // })
+      })
+    </script>
+  </body>
+</html>
